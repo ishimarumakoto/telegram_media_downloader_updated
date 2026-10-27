@@ -13,12 +13,12 @@ from io import BytesIO, StringIO
 from mimetypes import MimeTypes
 from typing import Callable, Iterable, List, Optional, Tuple, Union
 
-import pyrogram
+import pyrogram2 as pyrogram
 from loguru import logger
-from pyrogram import enums, parser, types, utils
-from pyrogram.client import Cache
-from pyrogram.enums import MessageEntityType
-from pyrogram.file_id import (
+from pyrogram2 import enums, parser, types, utils
+from pyrogram2.client import Cache
+from pyrogram2.enums import MessageEntityType
+from pyrogram2.file_id import (
     FILE_REFERENCE_FLAG,
     PHOTO_TYPES,
     WEB_LOCATION_FLAG,
@@ -26,7 +26,7 @@ from pyrogram.file_id import (
     b64_decode,
     rle_decode,
 )
-from pyrogram.mime_types import mime_types
+from pyrogram2.mime_types import mime_types
 
 from module.app import (
     Application,

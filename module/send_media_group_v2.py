@@ -5,9 +5,9 @@ import re
 from datetime import datetime
 from typing import Callable, List, Optional, Union
 
-import pyrogram
-from pyrogram import raw, types, utils
-from pyrogram.file_id import FileType
+import pyrogram2 as pyrogram
+from pyrogram2 import raw, types, utils
+from pyrogram2.file_id import FileType
 
 log = logging.getLogger(__name__)
 

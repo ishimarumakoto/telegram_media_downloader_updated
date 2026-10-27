@@ -3,7 +3,7 @@ import asyncio
 import time
 from enum import Enum
 
-from pyrogram import Client
+from pyrogram2 import Client
 
 from module.app import TaskNode
 

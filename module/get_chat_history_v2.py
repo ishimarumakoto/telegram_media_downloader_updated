@@ -3,10 +3,10 @@
 from datetime import datetime
 from typing import AsyncGenerator, Optional, Union
 
-import pyrogram
+import pyrogram2 as pyrogram
 
 # pylint: disable = W0611
-from pyrogram import raw, types, utils
+from pyrogram2 import raw, types, utils
 
 
 async def get_chunk_v2(

@@ -5,11 +5,11 @@ import os
 from datetime import datetime
 from typing import Callable, List, Union
 
-import pyrogram
+import pyrogram2 as pyrogram
 from loguru import logger
-from pyrogram import types
-from pyrogram.handlers import CallbackQueryHandler, MessageHandler
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram2 import types
+from pyrogram2.handlers import CallbackQueryHandler, MessageHandler
+from pyrogram2.types import InlineKeyboardButton, InlineKeyboardMarkup
 from ruamel import yaml
 
 import utils

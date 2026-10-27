@@ -6,9 +6,10 @@ import shutil
 import time
 from typing import List, Optional, Tuple, Union
 
-import pyrogram
+import pyrogram2 as pyrogram
+from pyrogram2 import raw
 from loguru import logger
-from pyrogram.types import Audio, Document, Photo, Video, VideoNote, Voice
+from pyrogram2.types import Audio, Document, Photo, Video, VideoNote, Voice
 from rich.logging import RichHandler
 
 from module.app import Application, ChatDownloadConfig, DownloadStatus, TaskNode
@@ -48,10 +49,10 @@ app = Application(CONFIG_NAME, DATA_FILE_NAME, APPLICATION_NAME)
 queue: asyncio.Queue = asyncio.Queue()
 RETRY_TIME_OUT = 3
 
-logging.getLogger("pyrogram.session.session").addFilter(LogFilter())
-logging.getLogger("pyrogram.client").addFilter(LogFilter())
+logging.getLogger("pyrogram2.session.session").addFilter(LogFilter())
+logging.getLogger("pyrogram2.client").addFilter(LogFilter())
 
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
+logging.getLogger("pyrogram2").setLevel(logging.WARNING)
 
 
 def _check_download_finish(media_size: int, download_path: str, ui_file_name: str):
@@ -348,6 +349,38 @@ async def download_task(
 # pylint: disable = R0915,R0914
 
 
+async def _download_live_photo_video(
+    client: pyrogram.client.Client,
+    message: pyrogram.types.Message,
+    photo_path: str,
+    photo_temp_path: str,
+):
+    """Live photo = photo + short video. Save video next to photo, same name."""
+    try:
+        peer = await client.resolve_peer(message.chat.id)
+        ids = [raw.types.InputMessageID(id=message.id)]
+        if isinstance(peer, raw.types.InputPeerChannel):
+            res = await client.invoke(
+                raw.functions.channels.GetMessages(channel=peer, id=ids)
+            )
+        else:
+            res = await client.invoke(raw.functions.messages.GetMessages(id=ids))
+        doc = res.messages[0].media.video
+        if doc is None:
+            return
+        attrs = {type(i): i for i in doc.attributes}
+        video = Video._parse(
+            client, doc, attrs.get(raw.types.DocumentAttributeVideo), None
+        )
+        video_path = os.path.splitext(photo_path)[0] + ".mp4"
+        video_temp_path = os.path.splitext(photo_temp_path)[0] + ".mp4"
+        temp = await client.download_media(video, file_name=video_temp_path)
+        if temp and isinstance(temp, str):
+            _move_to_download_path(temp, video_path)
+    except Exception as e:  # pylint: disable = W0703
+        logger.error(f"Message[{message.id}]: live photo video failed [{e}]")
+
+
 @record_download_status
 async def download_media(
     client: pyrogram.client.Client,
@@ -455,6 +488,10 @@ async def download_media(
                 _check_download_finish(media_size, temp_download_path, ui_file_name)
                 await asyncio.sleep(0.5)
                 _move_to_download_path(temp_download_path, file_name)
+                if _type == "photo":
+                    await _download_live_photo_video(
+                        client, message, file_name, temp_file_name
+                    )
                 # TODO: if not exist file size or media
                 return DownloadStatus.SuccessDownload, file_name
         except pyrogram.errors.exceptions.bad_request_400.BadRequest:
