@@ -1,8 +1,75 @@
-api_hash: your_api_hash
-api_id: your_api_id
+api_hash: 0da780ab0d39b0ff067bc4dc9775a487
+api_id: 29287371
 chat:
-- chat_id: telegram_chat_id
+- chat_id: -1001512082285
   last_read_message_id: 0
+- chat_id: -1001917113309
+  last_read_message_id: 0
+- chat_id: -1001742660350
+  last_read_message_id: 18
+- chat_id: -1001893652186
+  last_read_message_id: 169
+- chat_id: -1001599481587
+  last_read_message_id: 0
+- chat_id: -1001929650491
+  last_read_message_id: 51
+- chat_id: -1002056688332
+  last_read_message_id: 0
+- chat_id: -1001979598000
+  last_read_message_id: 225
+- chat_id: -1001979598000
+  last_read_message_id: 0
+- chat_id: -1001940397918
+  last_read_message_id: 0
+- chat_id: -1002018925328
+  last_read_message_id: 0
+- chat_id: -1002015078320
+  last_read_message_id: 0
+- chat_id: -1001613356278
+  last_read_message_id: 0
+- chat_id: -1002356493746
+  last_read_message_id: 0
+- chat_id: -1001720265471
+  last_read_message_id: 0
+- chat_id: -1001867528704
+  last_read_message_id: 0
+- chat_id: -1001745800977
+  last_read_message_id: 0
+- chat_id: -1001693354200
+  last_read_message_id: 0
+- chat_id: -1002146238018
+  last_read_message_id: 0
+- chat_id: -1002338823906
+  last_read_message_id: 0
+- chat_id: -1002823392405
+  last_read_message_id: 0
+- chat_id: -1002816070662
+  last_read_message_id: 0
+- chat_id: -1003095765613
+  last_read_message_id: 205
+- chat_id: -1002825623514
+  last_read_message_id: 0
+- chat_id: 2071482280
+  last_read_message_id: 0
+- chat_id: -1001917113309
+  last_read_message_id: 86
+- chat_id: -1003712133663
+  last_read_message_id: 456
+- chat_id: -1003834575984
+  last_read_message_id: 946
+- chat_id: -1002381847385
+  last_read_message_id: 455
+- chat_id: -1002485155806
+  last_read_message_id: 83
+- chat_id: -1001937714539
+  last_read_message_id: 454
+- chat_id: -1003821538613
+  last_read_message_id: 1317
+- chat_id: -1001962722702
+  last_read_message_id: 0
+- chat_id: -1003380203019
+  last_read_message_id: 0
+
 file_formats:
   audio:
   - all
@@ -12,7 +79,6 @@ file_formats:
   - all
 file_path_prefix:
 - chat_title
-- media_datetime
 media_types:
 - audio
 - photo
@@ -20,5 +86,12 @@ media_types:
 - document
 - voice
 - video_note
+- animation
 # in linux please use /
-# save_path: E:\github\telegram_media_downloader
+save_path: C:\telegram_downloader
+web_host: 127.0.0.1
+web_port: 5000
+language: EN
+filter_advertisement_list: []
+replace_advertisement_list: []
+group_add_advertisement: {}

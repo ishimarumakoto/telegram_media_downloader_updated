@@ -38,7 +38,6 @@ async def get_chunk_v2(
             ),
             sleep_threshold=60,
         ),
-        replies=0,
     )
 
     if reverse:
